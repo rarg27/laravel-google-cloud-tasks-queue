@@ -95,7 +95,7 @@ class CloudTasksServiceProvider extends LaravelServiceProvider
          */
         $router = $this->app['router'];
 
-        $router->post('handle-task', [TaskHandler::class, 'handle'])->name('cloud-tasks.handle-task');
+        // $router->post('handle-task', [TaskHandler::class, 'handle'])->name('cloud-tasks.handle-task');
 
         if (CloudTasks::dashboardDisabled()) {
             return;

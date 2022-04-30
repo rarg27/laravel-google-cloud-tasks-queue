@@ -13,7 +13,7 @@ class CreateStackkitCloudTasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('stackkit_cloud_tasks', function (Blueprint $table) {
+        Schema::create(config('cloud-tasks.dashboard.table'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('queue');
             $table->string('task_uuid');

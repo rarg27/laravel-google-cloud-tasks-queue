@@ -114,4 +114,9 @@ class StackkitCloudTask extends Model
             JSON_PRETTY_PRINT
         );
     }
+
+    public function getTable()
+    {
+        return config('cloud-tasks.dashboard.table');
+    }
 }

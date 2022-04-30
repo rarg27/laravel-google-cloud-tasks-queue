@@ -1,10 +1,14 @@
 {
-    "name": "stackkit/laravel-google-cloud-tasks-queue",
+    "name": "rarg27/laravel-google-cloud-tasks-queue",
     "license": "MIT",
     "authors": [
         {
             "name": "Marick van Tuil",
             "email": "info@marickvantuil.nl"
+        },
+        {
+            "name": "Renz Albert Galang",
+            "email": "galang.renzalbert@gmail.com"
         }
     ],
     "require": {

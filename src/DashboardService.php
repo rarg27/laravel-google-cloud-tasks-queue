@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Queue\Events\JobExceptionOccurred;
 use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use function Safe\json_decode;
 
 class DashboardService
@@ -49,17 +50,18 @@ class DashboardService
 
         $metadata->addEvent($status, $data);
 
-        DB::table('stackkit_cloud_tasks')
-            ->insert([
-                'task_uuid' => $this->getTaskUuid($task),
-                'name' => $this->getTaskName($task),
-                'queue' => $queue,
-                'payload' =>  $this->getTaskBody($task),
-                'status' => $status,
-                'metadata' => $metadata->toJson(),
-                'created_at' => now()->utc(),
-                'updated_at' => now()->utc(),
-            ]);
+        $taskModel = new StackkitCloudTask;
+        $taskModel->setRawAttributes([
+            'task_uuid' => $this->getTaskUuid($task),
+            'name' => $this->getTaskName($task),
+            'queue' => $queue,
+            'payload' =>  $this->getTaskBody($task),
+            'status' => $status,
+            'metadata' => $metadata->toJson(),
+            'created_at' => now()->utc(),
+            'updated_at' => now()->utc(),
+        ]);
+        $taskModel->save();
     }
 
     public function markAsRunning(string $uuid): void
